@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #16001f, #5b075f, #ff4f81);
+  color: white;
+  text-align: center;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+
+.card {
+  width: 100%;
+  max-width: 500px;
+  padding: 40px 25px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.13);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 40px rgba(255,255,255,0.18);
+}
+
+h1 {
+  font-size: 42px;
+  margin: 10px 0;
+}
+
+h2 {
+  font-size: 28px;
+  margin: 15px 0;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+#countdown {
+  font-size: 45px;
+  font-weight: bold;
+  margin: 25px 0;
+}
+
+.cake {
+  font-size: 90px;
+  animation: bounce 1.5s infinite;
+}
+
+.hidden {
+  display: none;
+}
+
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 25px;
+  animation: float 5s linear infinite;
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+button {
+  border: none;
+  padding: 14px 25px;
+  border-radius: 30px;
+  background: white;
+  color: #d4145a;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <div id="before">
+      <h2>Something Special Is Coming... 💕</h2>
+      <p>Get ready for a beautiful birthday surprise 🎁</p>
+
+      <div id="countdown">00:00:00</div>
+
+      <p>🎀 Just a little more time... 🎀</p>
+    </div>
+
+    <div id="after" class="hidden">
+      <div class="cake">🎂</div>
+
+      <h1>🎉 HAPPY BIRTHDAY 🎉</h1>
+
+      <h2>To My Special Person ❤️</h2>
+
+      <p>
+        Wishing you a day filled with happiness, smiles,
+        love and beautiful memories. 💕
+      </p>
+
+      <p>
+        May all your dreams come true! ✨
+      </p>
+
+      <p>🎂🥳💖🎁🌸</p>
+
+      <button onclick="showMessage()">Tap for a Surprise 💝</button>
+
+      <p id="message" class="hidden">
+        You deserve all the happiness in the world! ❤️✨
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+
+/*
+   CHANGE THIS DATE AND TIME
+   Example:
+   "2026-10-07T00:00:00"
+*/
+
+const birthday = new Date("2026-10-07T00:00:00").getTime();
+
+function updateCountdown() {
+
+  const now = new Date().getTime();
+  const distance = birthday - now;
+
+  if (distance <= 0) {
+
+    document.getElementById("before").classList.add("hidden");
+    document.getElementById("after").classList.remove("hidden");
+
+    createHearts();
+    return;
+  }
+
+  const hours = Math.floor(distance / (1000 * 60 * 60));
+  const minutes = Math.floor(
+    (distance % (1000 * 60 * 60)) / (1000 * 60)
+  );
+  const seconds = Math.floor(
+    (distance % (1000 * 60)) / 1000
+  );
+
+  document.getElementById("countdown").innerHTML =
+    String(hours).padStart(2,"0") + ":" +
+    String(minutes).padStart(2,"0") + ":" +
+    String(seconds).padStart(2,"0");
+}
+
+function showMessage() {
+  document.getElementById("message").classList.remove("hidden");
+}
+
+function createHearts() {
+
+  setInterval(() => {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    const hearts = ["❤️","💖","💕","💗","💝","✨"];
+
+    heart.innerHTML =
+      hearts[Math.floor(Math.random() * hearts.length)];
+
+    heart.style.left =
+      Math.random() * 100 + "vw";
+
+    heart.style.animationDuration =
+      (3 + Math.random() * 4) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 7000);
+
+  }, 500);
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+</script>
+
+</body>
+</html>
+const birthday = new Date("2026-10-07T00:00:00").getTime();
